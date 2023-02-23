@@ -3,7 +3,7 @@
 if ('serviceWorker' in navigator && ENV === 'production') {
   window.addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./service-worker.js', { scope: '/' })
+      const registration = await navigator.serviceWorker.register('./service-worker.js')
       registration.update()
       if (registration.installing) {
         console.log('离线文件安装中')
