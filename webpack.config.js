@@ -196,7 +196,11 @@ module.exports = (env) => {
           {
             from: 'public',
             to: 'public'
-          }
+          },
+          path.posix.join(
+            path.resolve(__dirname).replace(/\\/g, '/'),
+            'manifest.webmanifest'
+          )
         ]
       }),
       new VueLoaderPlugin(),
