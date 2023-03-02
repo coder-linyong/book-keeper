@@ -6,17 +6,28 @@ import CostType from './cost-type.vue'
 import { dateFormat } from '../../../util/date'
 
 const visible = ref(false)
-const record = ref<Record>({ name: '', amount: 0, time: dateFormat(new Date()), type: '' })
+const record = ref<Record>({
+  name: '',
+  amount: 0,
+  time: dateFormat(new Date()),
+  type: ''
+})
 const form = ref<QForm | null>(null)
 
 const onAdd = async () => {
-  const validated = form.value.validate()
+  const validated = await form.value.validate()
+  console.log(validated)
   if (!validated) return
   const amount = Number(record.value.amount)
   record.value.amount = isNaN(amount) ? 0 : amount
   addRecord(record.value)
-  types.push(record.value.type)
-  record.value = { name: '', amount: 0, time: dateFormat(new Date()), type: '' }
+  !types.includes(record.value.type) && types.push(record.value.type)
+  record.value = {
+    name: '',
+    amount: 0,
+    time: dateFormat(new Date()),
+    type: ''
+  }
   visible.value = false
 }
 </script>

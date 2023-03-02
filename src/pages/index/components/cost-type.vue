@@ -13,6 +13,12 @@ const selected = computed({
     emit('update:modelValue', val)
   }
 })
+
+const onSelected = (type: string) => {
+  selected.value = type
+  input.value = type
+}
+
 watch(input, (val) => {
   selected.value = val
 })
@@ -26,7 +32,7 @@ watch(input, (val) => {
       v-for="(type,index) of types"
       :key="type"
       :class="[$style.type,selected===type?'bg-grey-4':'bg-grey-2']"
-      @click="selected=type">
+      @click="onSelected(type)">
       {{ type }}
       <q-btn icon="close" round size="xs" @click="types.splice(index,1)"/>
     </div>
